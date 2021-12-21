@@ -176,7 +176,7 @@ function App() {
   }, [roomToCreate]);
 
   return (
-    <div className="app">
+    <div className="app" data-testid="app-div">
       {
         nsActive ?
         <ServerDashboard

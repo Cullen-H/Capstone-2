@@ -53,7 +53,7 @@ function Rooms({ nsActive, rooms, setRoomActive, roomActive, setRoomToCreate }) 
   };
 
   return (
-    <div className="rooms-container">
+    <div className="rooms-container" data-testid="rooms-container">
       <div className="rooms">
         {
           rooms.map(room => {

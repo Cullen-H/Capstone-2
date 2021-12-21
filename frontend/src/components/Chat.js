@@ -20,7 +20,7 @@ function Chat({ messages, setMessageToSend, roomActive }) {
   };
 
   return (
-    <div className="chat-container">
+    <div className="chat-container" data-testid="chat-container">
       <div>
         <div className="messages-container">
           <Messages messages={messages} />

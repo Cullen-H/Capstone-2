@@ -10,7 +10,6 @@ const { NODE_ENV } = require('./config');
 const app = express();
 app.use(cors());
 app.use(express.json());
-// TODO: app.use(authenticateJWT) ? This would be necessary for other user info routes.
 
 app.use('/auth', auth);
 

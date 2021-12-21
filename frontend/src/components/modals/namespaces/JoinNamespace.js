@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 
-function JoinNamespace({ setNsToJoin, setCreateOrJoin, setNewNsModalActive }) {
-  console.log('rendering JoinNamespace');
+/** JoinNamespace.js displays the necessary form for 
+  * joining an existing namespace to a user. Form data is 
+  * handled and passed to App.js to be sent to the server.
+  */
 
+
+function JoinNamespace({ setNsToJoin, setCreateOrJoin, setNewNsModalActive }) {
   const initialFormData = {
     endpoint: ''
   };
@@ -10,7 +14,6 @@ function JoinNamespace({ setNsToJoin, setCreateOrJoin, setNewNsModalActive }) {
   const [formData, setFormData] = useState(initialFormData);
 
   const toggleCreateOrJoin = () => {
-    // TODO:  sets to create; clears form data
     setFormData(initialFormData);
     setCreateOrJoin('create');
   };
@@ -26,7 +29,6 @@ function JoinNamespace({ setNsToJoin, setCreateOrJoin, setNewNsModalActive }) {
   const gatherInput = evt => {
     evt.preventDefault();
     setNsToJoin(formData);
-    // TODO: close modal and add users token in App componenets useEffect
     setFormData(initialFormData);
     setNewNsModalActive(false);
   };

@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 
+/** CreateNamespace.js displays the necessary form for 
+  * creating a new namespace to a user. Form data is 
+  * handled and passed to App.js to be sent to the server.
+  */
+
 function CreateNamespace({ setNsToCreate, setCreateOrJoin, setNewNsModalActive }) {
   const initialFormData = {
     title: '',
@@ -24,7 +29,6 @@ function CreateNamespace({ setNsToCreate, setCreateOrJoin, setNewNsModalActive }
   const gatherInput = evt => {
     evt.preventDefault();
     setNsToCreate(formData);
-    // TODO: close modal and add users token in App components useEfect
     setFormData(initialFormData);
     setNewNsModalActive(false);
   };

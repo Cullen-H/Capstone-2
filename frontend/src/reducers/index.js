@@ -6,6 +6,11 @@ import {
   socketServerUrl,
 } from '../config';
 
+/** A users relevant info is contained within this reducer.
+  * Namely, it contains necessary authentication data, 
+  * github api data, and the url to the socket server.
+  */
+
 export const AUTH_USER = 'auth_user';
 export const LOGOUT_USER = 'logout_user';
 
@@ -26,11 +31,9 @@ export default (state = initialState, action) => {
         auth: true,
         ...action.payload
       }
-    // TODO: may need to remove github user as well. I'm unsure.
     case LOGOUT_USER:
       localStorage.removeItem('chatToken');
       localStorage.removeItem('githubUserInfo');
-      // TODO: user may not be necessary here or in intial state. May also want to save to localstorage
       return {
         auth: false,
       }

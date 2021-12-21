@@ -13,9 +13,8 @@ function Namespaces({ namespaces, setNsActive, nsActive, setNsToCreate, setNsToJ
   const [newNsModalActive, setNewNsModalActive] = useState(false);
 
   return (
-    <div className="namespaces">
+    <div className="namespaces" data-testid="namespaces-container">
       {namespaces.map(ns => {
-        console.log(ns);
         return (
           <div className="namespace" key={ns.endpoint}>
             <p className="ns-title" key={ns.endpoint}>{ns.nsTitle}</p>

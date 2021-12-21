@@ -47,7 +47,6 @@ function Login() {
             socket: io(socketServerUrl, getAuth())
           }
         });
-        console.log('authorized');
         if (authError !== null) setAuthError(null);
       } catch(err) {
         setAuthError(err.message);
@@ -66,7 +65,7 @@ function Login() {
   }
   
   return (
-    <div className="login">
+    <div className="login" data-testid="login-container">
       <h1 className="login-title">COLLABORATOR</h1>
       {isAuthError()}
       <div className="login-container">

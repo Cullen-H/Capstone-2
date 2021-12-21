@@ -18,7 +18,6 @@ const store = createStore(reducer);
 
 const token = localStorage.getItem('chatToken');
 
-// TODO: Will I be missing the github user?
 if (token) {
   store.dispatch({
     type: AUTH_USER,
@@ -27,21 +26,6 @@ if (token) {
     }
   })
 }
-
-// TODO: delete garbage
-
-// TODO: maybe remodel public and private route hooks to use the children like the normal react <Route><Component /></Route>
-// ReactDOM.render(
-//   <Provider store={store}>
-//     <BrowserRouter>
-//       <Switch>
-//         <PublicRoute path={'/login'} comonent={Login} />
-//         <PrivateRoute path={'/dashboard'} component={App} />
-//       </Switch>
-//     </BrowserRouter>
-//   </Provider>,
-//   document.getElementById('root')
-// );
 
 ReactDOM.render(
   <React.StrictMode>

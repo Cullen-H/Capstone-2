@@ -1,11 +1,16 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
+/** PublicRoute.js allows a user to access any routes
+  * that do not require a user to be logged in. If a 
+  * user is logged in they will be redirected to their
+  * dashboard.
+  */
+
 function PublicRoute({ path, children }) {
   const token = localStorage.getItem('chatToken');
 
   if (token) {
-    console.log('redirecting from public route: ', window.location.href);
     return(
       <Redirect to='/dashboard' />
     );
@@ -19,21 +24,3 @@ function PublicRoute({ path, children }) {
 }
 
 export default PublicRoute;
-
-// import React from 'react';
-// import { Route, Redirect } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-
-// function PublicRoute({ component: Component, ...rest }) {
-//   const authenticated = useSelector(state => state.auth);
-
-//   return (
-//     <Route
-//       {...rest}
-//       component={props => authenticated ?
-//       <Redirect to={'/dashboard'} /> : <Component {...props} />}
-//     />
-//   )
-// }
-
-// export default PublicRoute;

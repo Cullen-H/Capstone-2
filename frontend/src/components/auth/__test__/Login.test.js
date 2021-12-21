@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import reducer from './reducers';
-import App from './App';
+import reducer from '../../../reducers';
+import Login from '../Login';
 
 function renderWithRedux(component, { initialState, store=createStore(reducer, initialState) } = {}) {
   return {
@@ -10,8 +10,8 @@ function renderWithRedux(component, { initialState, store=createStore(reducer, i
   };
 }
 
-test('renders the app component', () => {
-  const { getByTestId } = renderWithRedux(<App />);
-  const containerElement = screen.getByTestId(/app-div/i);
-  expect(containerElement).toBeInTheDocument();
+test('renders the login component', () => {
+  const { getByTestId } = renderWithRedux(<Login />);
+  const loginElement = screen.getByTestId(/login-container/i);
+  expect(loginElement).toBeInTheDocument();
 });

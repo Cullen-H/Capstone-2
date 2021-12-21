@@ -1,5 +1,5 @@
 const express = require('express');
-const axios = require('axios'); // TODO: Use this for github oauth
+const axios = require('axios');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const router = new express.Router();
@@ -19,6 +19,14 @@ require('../models/Server');
 const User = mongoose.model('users');
 const Server = mongoose.model('servers');
 
+/** This auth route receives the relevant data for receiving a
+  * GitHub access token from the frontend application. It then 
+  * passes that infromation to GitHub and uses the token as 
+  * a means to authenticate users communicating with the socket
+  * server. The users id, username, and avatar url are then 
+  * returned to the frontend application for use.
+  */
+
 router.post('/authenticate', async (req, res) => {
   const { code } = req.body;
   
@@ -36,8 +44,6 @@ router.post('/authenticate', async (req, res) => {
     const res = await axios.get('https://api.github.com/user', { headers: { Authorization: `token ${access_token}` } });
     return res;
   }).then(async (response) => {
-    console.log('response: ', response);
-    console.log('response.data: ', response.data);
     const token = jwt.sign({ username: req.username }, secretJwt);
     const collaboratorUser = await User.findOneAndUpdate({ github_userId: response.data.id }, {
       username: response.data.login,
@@ -47,8 +53,6 @@ router.post('/authenticate', async (req, res) => {
       upsert: true,
       new: true
     });
-    console.log('collaboratorUser: ', collaboratorUser);
-    // TODO: expand upon what data is returned to the authorized user. more than avatar and username
     return res.status(200).json({
       token: token,
       github_user_info: {
@@ -68,16 +72,11 @@ router.post('/is-ns-owner', async (req, res) => {
     const user = await User.findOne({ token: req.body.token });
     if (!user) throw new Error('User does not exist.');
     const server = await Server.findOne({ endpoint: req.body.endpoint });
-    // console.log('server: ', server);
-    // console.log('server.endpoint: ', server.endpoint);
     if (!server) throw new Error('Issue finding server.');
-    // console.log('serverId: ', server.ownerId);
-    // console.log('userId  : ', user.github_userId);
     if (server.ownerId === user.github_userId) return res.status(200).json({"isOwner": true});
     return res.status(200).json({"isOwner": false});
   } catch (err) {
-    console.log(err);
-    // console.log('BAD REQUEST AT IS-NS-OWNER: ', err);
+    console.error(err);
     return res.status(400).json(err);
   }
 });

@@ -7,7 +7,7 @@ import Chat from './Chat';
 
 function ServerDashboard({ nsActive, rooms, setRoomActive, roomActive, messages, setMessageToSend, setRoomToCreate }) {
   return (
-    <div className="server-dashboard">
+    <div className="server-dashboard" data-testid="server-dashboard-container">
       <Rooms 
         nsActive={nsActive}
         rooms={rooms}
@@ -15,7 +15,7 @@ function ServerDashboard({ nsActive, rooms, setRoomActive, roomActive, messages,
         roomActive={roomActive}
         setRoomToCreate={setRoomToCreate}
       />
-      <div className="chat">
+      <div className="chat" data-testid="chat-container">
       {roomActive ?
         <Chat
           messages={messages}

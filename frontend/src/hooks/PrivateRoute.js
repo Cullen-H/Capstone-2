@@ -1,14 +1,18 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
+/** PrivateRoute.js checks if a user is logged in and 
+  * then redirects to the proper route. The check is 
+  * performed by looking for an existing chat token.
+  * If this token is invalid the App.js component will
+  * remove the item from local storage and reurn the user
+  * to the login page.
+  */
+
 function PrivateRoute({ path, children }) {
-  console.log('kasdjklasjd');
-  
   const token = localStorage.getItem('chatToken');
-  console.log('token: ', token);
 
   if (!token) {
-    console.log('redirecting');
     return (
       <Redirect to='/login' />
     );
@@ -22,25 +26,3 @@ function PrivateRoute({ path, children }) {
 }
 
 export default PrivateRoute;
-
-// TODO: delete garbage
-
-// import React from 'react';
-// import { Route, Redirect } from 'react-router-dom';
-// import { useSelector } from 'react-redux';
-
-// function PrivateRoute({ component: Component, ...rest }) {
-//   const authenticated = useSelector(state => state.auth);
-
-//   return (
-//     <Route
-//       {...rest}
-//       component={(props) => authenticated ?
-//       <React.StrictMode>
-//         <Component {...props} />
-//       </React.StrictMode> : <Redirect to={'/'} /> }
-//     />
-//   );
-// }
-
-// export default PrivateRoute;
